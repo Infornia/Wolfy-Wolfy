@@ -6,12 +6,12 @@
 #    By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/29 18:08:50 by mwilk             #+#    #+#              #
-#    Updated: 2015/09/29 18:46:54 by mwilk            ###   ########.fr        #
+#    Updated: 2015/09/29 19:58:56 by mwilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = Wolfy
+NAME = wolf3d
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror

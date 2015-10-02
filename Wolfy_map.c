@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:00:33 by mwilk             #+#    #+#             */
-/*   Updated: 2015/09/29 20:25:46 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/10/02 18:31:26 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int		init(t_data *d)
 {
-	if ((fd = open(d->mapname, O_RDYONLY)) == -1)
+	int	fd;
+
+	if ((fd = open(d->map_name, O_RDONLY)) == -1)
 	{
 		ft_puts("I can't open map");
 		return (0);
@@ -30,25 +32,28 @@ int		init(t_data *d)
 
 int		get_map(t_data *d, int fd, int x, int y)
 {
-	char *line;
+	char *s;
 
-	while ((line = get_next_line(fd, &line)))
+	while (get_next_line(fd, &s))
 	{
-		if (s[0] == '0' || s[0] == '1')
+		ft_puts(s);
+		while (s[x] == '0' || s[x] == '1')
 		{
-			data->map[y][x] = s[0] - 48;
+			d->map[y][x] = s[0] - 48;
 			++x;
-			if (x > SIZE_MAP + 1)
+			if (x > MAP_SIZE + 1)
 				return (1);
 		}
-		else if (s[0] == '\0')
+		if (s[x] == '\0')
 		{
 			++y;
 			x = 0;
-			if (y > SIZE_MAP + 1)
+			if (y > MAP_SIZE + 1)
 				return (1);
 		}
 		else
 			return (1);
+		ft_strdel(&s);
 	}
+	return (0);
 }

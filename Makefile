@@ -6,7 +6,7 @@
 #    By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/29 18:08:50 by mwilk             #+#    #+#              #
-#    Updated: 2015/10/08 16:55:04 by mwilk            ###   ########.fr        #
+#    Updated: 2015/10/08 20:26:59 by mwilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,11 @@ SRC_PATH = ./
 
 OBJ = $(SRC:.c=.o)
 SRC = main.c\
+	  wolfy_draw.c\
+	  wolfy_events.c\
+	  wolfy_init.c\
 	  wolfy_map.c\
 	  wolfy_utils.c\
-	  wolfy_init.c\
 
 OBJS = $(addprefix $(OJB_PATH),$(OBJ))
 SRCS = $(addprefix $(SRC_PATH),$(SRC))

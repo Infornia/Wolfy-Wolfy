@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:18:39 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/08 20:05:00 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/10/08 21:23:48 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,18 @@
 #define WIN_X		640
 #define WIN_Y		480
 
+#define KEB_KEY		e.key.keysym.sym
+
 typedef struct	s_data
 {
 	SDL_Window		*win;
 	SDL_Renderer	*rend;
-	SDL_Event		*e;
+	SDL_Event		e;
 
-	int		map[MAP_SIZE][MAP_SIZE];
-	char	*map_name;
+	int				map[MAP_SIZE][MAP_SIZE];
+	char			*map_name;
+
+	int				go;
 }			t_data;
 
 /*
@@ -52,6 +56,20 @@ int		put_error(char *s);
 */
 
 int		init(t_data *d);
-void	clean_up(t_data *d);
+int		clean_up(t_data *d, int ret);
+
+
+/*
+** wolfy_event.c
+*/
+
+void	events(t_data *d);
+
+
+/*
+** wolfy_draw.c
+*/
+
+void	draw();
 
 #endif

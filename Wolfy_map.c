@@ -6,13 +6,13 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:00:33 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/02 18:31:26 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/10/02 19:32:08 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolfy.h"
 
-int		init(t_data *d)
+int		init_map(t_data *d)
 {
 	int	fd;
 
@@ -36,15 +36,14 @@ int		get_map(t_data *d, int fd, int x, int y)
 
 	while (get_next_line(fd, &s))
 	{
-		ft_puts(s);
-		while (s[x] == '0' || s[x] == '1')
+		while (s[x])
 		{
-			d->map[y][x] = s[0] - 48;
+			d->map[y][x] = s[x] - 48;
 			++x;
 			if (x > MAP_SIZE + 1)
 				return (1);
 		}
-		if (s[x] == '\0')
+		if (!s[x])
 		{
 			++y;
 			x = 0;

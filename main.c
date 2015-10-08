@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 18:11:04 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/02 18:22:14 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/10/08 20:04:56 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@ int		main(int ac, char **av)
 {
 	t_data	d;
 
-	(void)ac;
+	if (ac == 2)
+	{
 	d.map_name = av[1];
-	init(&d);
-	SDL_Init(SDL_INIT_VIDEO);
-	SDL_Window* pWindow = NULL;
-	pWindow = SDL_CreateWindow("COUCOU", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
-
-	SDL_Delay(3000);
-	SDL_DestroyWindow(pWindow);
-	SDL_Quit();
+	if (init(&d))
+		return (0);
+	}
+	else
+		ft_puts("Usage: ./wolf3d [MAP]");
 	return(0);
 }

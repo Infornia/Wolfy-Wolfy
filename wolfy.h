@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:18:39 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/09 18:52:46 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/10/09 19:54:05 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,30 @@
 #define WIN_Y		480
 
 #define KEB_KEY		e.key.keysym.sym
+
+typedef struct	s_ray
+{
+	double		camx;
+	double	ray_x;
+	double	ray_y;
+	double	ray_dx;
+	double	ray_dy;
+	int		mapx;
+	int		mapy;
+	double	side_x;
+	double	side_y;
+	double	delta_x;
+	double	delta_y;
+	double	wall_dist;
+	int		stepx;
+	int		stepy;
+	int		side;
+	int		line_h;
+	int		y;
+	double	wallx;
+	int		top;
+	double	fog;
+}				t_ray;
 
 typedef struct	s_input
 {

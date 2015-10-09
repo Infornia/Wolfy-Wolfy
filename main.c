@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 18:11:04 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/08 21:36:11 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/10/09 18:28:58 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,8 @@ int		main(int ac, char **av)
 		while (d.go)
 		{
 			ft_puts("Bonjour");
-			while (SDL_PollEvent(&d.e))
-			{
-				if (d.e.type == SDL_QUIT)
-					d.go = 0;
-				events(&d);
-			}
-			draw();
-			SDL_Delay(16);
+			events(&d);
+			draw(&d);
 		}
 		return (clean_up(&d, 0));
 	}

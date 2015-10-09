@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:18:39 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/08 21:23:48 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/10/09 18:52:46 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,23 @@
 
 #define KEB_KEY		e.key.keysym.sym
 
+typedef struct	s_input
+{
+	int			jump;
+	int			attack;
+	int			left;
+	int			right;
+	int			up;
+	int			down;
+}				t_input;
+
 typedef struct	s_data
 {
 	SDL_Window		*win;
 	SDL_Renderer	*rend;
 	SDL_Event		e;
 
+	t_input			i;
 	int				map[MAP_SIZE][MAP_SIZE];
 	char			*map_name;
 
@@ -70,6 +81,6 @@ void	events(t_data *d);
 ** wolfy_draw.c
 */
 
-void	draw();
+void	draw(t_data *d);
 
 #endif

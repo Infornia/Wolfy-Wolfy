@@ -6,71 +6,71 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/09 19:55:31 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/09 20:09:12 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/10/10 17:09:02 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolfy.h"
 
-static void	rayside(t_wolf *w)
+static void	DDA(t_data *d)
 {
-	while (w->map[w->r.mapx][w->r.mapy] < 2)
+	while (d->map[d->r.mapx][d->r.mapy] < 2)
 	{
-		if (w->r.side_x < w->r.side_y)
+		if (d->r.side_x < d->r.side_y)
 		{
-			w->r.side_x += w->r.delta_x;
-			w->r.mapx += w->r.stepx;
-			w->r.side = 0;
+			d->r.side_x += d->r.delta_x;
+			d->r.mapx += d->r.stepx;
+			d->r.side = 0;
 		}
 		else
 		{
-			w->r.side_y += w->r.delta_y;
-			w->r.mapy += w->r.stepy;
-			w->r.side = 1;
+			d->r.side_y += d->r.delta_y;
+			d->r.mapy += d->r.stepy;
+			d->r.side = 1;
 		}
 	}
 }
 
-static void	raydir(t_wolf *w)
+static void	raydir(t_data *d)
 {
-	if (w->r.ray_dx < 0)
+	if (d->r.ray_dx < 0)
 	{
-		w->r.stepx = -1;
-		w->r.side_x = (w->r.ray_x - w->r.mapx) * w->r.delta_x;
+		d->r.stepx = -1;
+		d->r.side_x = (d->r.ray_x - d->r.mapx) * d->r.delta_x;
 	}
 	else
 	{
-		w->r.stepx = 1;
-		w->r.side_x = (w->r.mapx + 1.0 - w->r.ray_x) * w->r.delta_x;
+		d->r.stepx = 1;
+		d->r.side_x = (d->r.mapx + 1.0 - d->r.ray_x) * d->r.delta_x;
 	}
-	if (w->r.ray_dy < 0)
+	if (d->r.ray_dy < 0)
 	{
-		w->r.stepy = -1;
-		w->r.side_y = (w->r.ray_y - w->r.mapy) * w->r.delta_y;
+		d->r.stepy = -1;
+		d->r.side_y = (d->r.ray_y - d->r.mapy) * d->r.delta_y;
 	}
 	else
 	{
-		w->r.stepy = 1;
-		w->r.side_y = (w->r.mapy + 1.0 - w->r.ray_y) * w->r.delta_y;
+		d->r.stepy = 1;
+		d->r.side_y = (d->r.mapy + 1.0 - d->r.ray_y) * d->r.delta_y;
 	}
 }
 
-static void	init_r(int x, t_wolf *w)
+static void	init_r(int x, t_data *d)
 {
-	w->r.camx = 2 * x / (double)WIN_X - 1;
-	w->r.ray_x = w->c.posx;
-	w->r.ray_y = w->c.posy;
-	w->r.ray_dx = w->c.dirx + w->c.planx * w->r.camx;
-	w->r.ray_dy = w->c.diry + w->c.plany * w->r.camx;
-	w->r.mapx = (int)w->c.posx;
-	w->r.mapy = (int)w->c.posy;
-	w->r.delta_x =
-		sqrt(1 + (w->r.ray_dy * w->r.ray_dy) / (w->r.ray_dx * w->r.ray_dx));
-	w->r.delta_y =
-		sqrt(1 + (w->r.ray_dx * w->r.ray_dx) / (w->r.ray_dy * w->r.ray_dy));
+	d->r.camx = 2 * x / (double)WIN_X - 1;
+	d->r.ray_x = d->c.posx;
+	d->r.ray_y = d->c.posy;
+	d->r.ray_dx = d->c.dirx + d->c.planx * d->r.camx;
+	d->r.ray_dy = d->c.diry + d->c.plany * d->r.camx;
+	d->r.mapx = (int)d->c.posx;
+	d->r.mapy = (int)d->c.posy;
+	d->r.delta_x =
+		sqrt(1 + (d->r.ray_dy * d->r.ray_dy) / (d->r.ray_dx * d->r.ray_dx));
+	d->r.delta_y =
+		sqrt(1 + (d->r.ray_dx * d->r.ray_dx) / (d->r.ray_dy * d->r.ray_dy));
 }
 
-void		raycast(t_wolf *w)
+void		raycast(t_data *d)
 {
 	int		x;
 	double	wd;
@@ -78,23 +78,23 @@ void		raycast(t_wolf *w)
 	x = 0;
 	while (x < WIN_X)
 	{
-		init_r(x, w);
-		raydir(w);
-		rayside(w);
-		if (w->r.side == 0)
+		init_r(x, d);
+		raydir(d);
+		DDA(d);
+		if (d->r.side == 0)
 		{
-			wd = (w->r.mapx - w->r.ray_x + (1 - w->r.stepx) / 2) / w->r.ray_dx;
-			w->r.wallx = w->r.ray_y + wd * w->r.ray_dy;
+			wd = (d->r.mapx - d->r.ray_x + (1 - d->r.stepx) / 2) / d->r.ray_dx;
+			d->r.wallx = d->r.ray_y + wd * d->r.ray_dy;
 		}
 		else
 		{
-			wd = (w->r.mapy - w->r.ray_y + (1 - w->r.stepy) / 2) / w->r.ray_dy;
-			w->r.wallx = w->r.ray_x + wd * w->r.ray_dx;
+			wd = (d->r.mapy - d->r.ray_y + (1 - d->r.stepy) / 2) / d->r.ray_dy;
+			d->r.wallx = d->r.ray_x + wd * d->r.ray_dx;
 		}
-		w->r.wall_dist = fabs(wd);
-		w->r.line_h = abs((int)(WIN_Y / w->r.wall_dist));
-		w->r.wallx -= floor(w->r.wallx);
-		draw(x, w);
+		d->r.wall_dist = fabs(wd);
+		d->r.line_h = abs((int)(WIN_Y / d->r.wall_dist));
+		d->r.wallx -= floor(d->r.wallx);
+		wall3d(x, d);
 		x++;
 	}
 }

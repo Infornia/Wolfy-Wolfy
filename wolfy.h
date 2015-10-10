@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:18:39 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/09 19:54:05 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/10/10 17:07:43 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ typedef struct	s_ray
 	double	fog;
 }				t_ray;
 
+typedef struct	s_cam
+{
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+	double	planx;
+	double	plany;
+}				t_cam;
+
 typedef struct	s_input
 {
 	int			jump;
@@ -66,6 +76,8 @@ typedef struct	s_data
 	SDL_Event		e;
 
 	t_input			i;
+	t_ray			r;
+	t_cam			c;
 	int				map[MAP_SIZE][MAP_SIZE];
 	char			*map_name;
 
@@ -106,5 +118,12 @@ void	events(t_data *d);
 */
 
 void	draw(t_data *d);
+
+
+/*
+** wolfy_ray.c
+*/
+
+void	raycast(t_data *d);
 
 #endif

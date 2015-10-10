@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/08 20:25:29 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/09 18:52:43 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/10/10 18:04:07 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	draw(t_data *d)
 {
 	SDL_SetRenderDrawColor(d->rend, 50, 100, 255, 128);
 	SDL_RenderClear(d->rend);
+	raycast(d);
 	SDL_RenderPresent(d->rend);
 
 	delay(1);

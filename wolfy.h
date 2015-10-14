@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:18:39 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/10 17:07:43 by mwilk            ###   ########.fr       */
+/*   Updated: 2015/10/14 19:23:58 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #define MAP_SIZE	24
 #define WIN_X		640
 #define WIN_Y		480
+#define TEX_W		64
+#define TEX_H		64
 
 #define KEB_KEY		e.key.keysym.sym
 
@@ -69,6 +71,13 @@ typedef struct	s_input
 	int			down;
 }				t_input;
 
+typedef struct	s_surface
+{
+	SDL_Surface		*wall;
+	SDL_Surface		*wall2;
+	SDL_Surface		*door;
+}				t_surface;
+
 typedef struct	s_data
 {
 	SDL_Window		*win;
@@ -78,6 +87,7 @@ typedef struct	s_data
 	t_input			i;
 	t_ray			r;
 	t_cam			c;
+	t_surface		s;
 	int				map[MAP_SIZE][MAP_SIZE];
 	char			*map_name;
 
@@ -96,6 +106,8 @@ int		get_map(t_data *d, int fd, int x, int y);
 */
 
 int		put_error(char *s);
+Uint32		getpixel(int x, int y, t_data *d);
+void	make_color(Uint32 color, Uint32 *rgb, int k, t_data *d);
 
 
 /*
@@ -126,4 +138,9 @@ void	draw(t_data *d);
 
 void	raycast(t_data *d);
 
+/*
+** wolfy_wall3d.c
+*/
+
+void		wall3d(int x, t_data *d);
 #endif

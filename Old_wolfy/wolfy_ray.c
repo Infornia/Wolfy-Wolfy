@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/09 19:55:31 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/10 17:09:02 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/02/11 16:10:58 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	raydir(t_data *d)
 
 static void	init_r(int x, t_data *d)
 {
-	d->r.camx = 2 * x / (double)WIN_X - 1;
+	d->r.camx = 2 * x / (double)WINX - 1;
 	d->r.ray_x = d->c.posx;
 	d->r.ray_y = d->c.posy;
 	d->r.ray_dx = d->c.dirx + d->c.planx * d->r.camx;
@@ -76,7 +76,7 @@ void		raycast(t_data *d)
 	double	wd;
 
 	x = 0;
-	while (x < WIN_X)
+	while (x < WINX)
 	{
 		init_r(x, d);
 		raydir(d);
@@ -92,7 +92,7 @@ void		raycast(t_data *d)
 			d->r.wallx = d->r.ray_x + wd * d->r.ray_dx;
 		}
 		d->r.wall_dist = fabs(wd);
-		d->r.line_h = abs((int)(WIN_Y / d->r.wall_dist));
+		d->r.line_h = abs((int)(WINY / d->r.wall_dist));
 		d->r.wallx -= floor(d->r.wallx);
 		wall3d(x, d);
 		x++;

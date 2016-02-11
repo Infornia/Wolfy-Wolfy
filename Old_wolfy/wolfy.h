@@ -6,26 +6,68 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:18:39 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/14 19:23:58 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/02/11 22:14:49 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLFY_H
 # define WOLFY_H
 
-#include "../../.brew/include/SDL2/SDL.h"
 #include "libft.h"
+#include "mlx.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <math.h>
 
-#define MAP_SIZE	24
-#define WIN_X		640
-#define WIN_Y		480
-#define TEX_W		64
-#define TEX_H		64
+/*
+**Parameters
+*/
+#define WINX		640
+#define WINY		480
 
-#define KEB_KEY		e.key.keysym.sym
+/*
+**Colors
+*/
+# define RED		0xFF0000
+# define GREEN		0x00FF00
+# define BLUE 		0x0000FF
+# define QUOISE		0x74BDF9
+# define GREEN 		0x00FF00
+# define PINK 		0xFF00FF
+# define WHITE 		0xFFFFFF
+# define GRAY 		0x0F0F0F
+# define BLACK 		0x000000
+# define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
+# define ABS(x)		((x) < 0 ? -(x) : (x))
+
+/*
+**keys
+*/
+# define ESC		53
+# define UP			126
+# define DOWN		125
+# define LEFT		123
+# define RIGHT		124
+# define TAB		48
+# define SHIFT		257
+# define ZOOM_IN	24
+# define ZOOM_OUT	27
+# define IT_UP		30
+# define IT_DOWN	33
+# define OPT_UP		39
+# define OPT_DOWN	41
+# define RESET		29
+# define KEY1		18
+# define KEY2		19
+# define NUM1		83
+# define NUM2		84
+# define NUM3		85
+# define NUM4		86
+# define NUM5		87
+# define NUM6		88
+# define KEYR		15
+# define ZOOM_IN_M	5
+# define ZOOM_OUT_M	4
 
 typedef struct	s_ray
 {
@@ -71,25 +113,18 @@ typedef struct	s_input
 	int			down;
 }				t_input;
 
-typedef struct	s_surface
-{
-	SDL_Surface		*wall;
-	SDL_Surface		*wall2;
-	SDL_Surface		*door;
-}				t_surface;
-
 typedef struct	s_data
 {
-	SDL_Window		*win;
-	SDL_Renderer	*rend;
-	SDL_Event		e;
+  void        *mlx;
+  void        *win;
+  void        *img;
+  char        *datimg;
+	char			  *map_name;
 
 	t_input			i;
 	t_ray			r;
 	t_cam			c;
-	t_surface		s;
 	int				map[MAP_SIZE][MAP_SIZE];
-	char			*map_name;
 
 	int				go;
 }			t_data;
@@ -98,31 +133,29 @@ typedef struct	s_data
 ** get_map.c
 */
 
-int		init_map(t_data *d);
-int		get_map(t_data *d, int fd, int x, int y);
+int				init_map(t_data *d);
+int				get_map(t_data *d, int fd, int x, int y);
 
 /*
-** wolfy_utils.c
+** wolfy_main.c
 */
 
-int		put_error(char *s);
-Uint32		getpixel(int x, int y, t_data *d);
-void	make_color(Uint32 color, Uint32 *rgb, int k, t_data *d);
-
+void			wolfy_main(t_data *d, char *file);
 
 /*
 ** wolfy_init.c
 */
 
-int		init(t_data *d);
-int		clean_up(t_data *d, int ret);
+void			init_mlx(t_data *d);
 
 
 /*
-** wolfy_event.c
+** wolfy_hook.c
 */
 
-void	events(t_data *d);
+void			expose_hook(t_data *d);
+void			mouse_hook(t_data *d);
+void			key_hook(int key, t_data *d);
 
 
 /*

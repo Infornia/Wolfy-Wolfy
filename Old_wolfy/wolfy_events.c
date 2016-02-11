@@ -5,54 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/08 20:24:05 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/09 18:20:25 by mwilk            ###   ########.fr       */
+/*   Created: 2016/02/11 21:11:20 by mwilk             #+#    #+#             */
+/*   Updated: 2016/02/11 22:10:06 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolfy.h"
 
-static void		event_keyboard(t_data *d)
+void		expose_hook(t_data *d)
 {
-	while (SDL_PollEvent(&d->e))
-	{
-		if (d->e.type == SDL_QUIT)
-			d->go = 0;
-		else if (d->e.type == SDL_KEYDOWN)
-		{
-			if (d->e.key.keysym.sym)
-			{
-				if (d->KEB_KEY == SDLK_ESCAPE)
-					d->go = 0;
-				if (d->KEB_KEY == SDLK_LEFT)
-					d->i.left = 1;
-				if (d->KEB_KEY == SDLK_RIGHT)
-					d->i.right = 1;
-				if (d->KEB_KEY == SDLK_UP)
-					d->i.up = 1;
-				if (d->KEB_KEY == SDLK_DOWN)
-					d->i.down = 1;
-			}
-		}
-		else if (d->e.type == SDL_KEYUP)
-		{
-			if (d->e.key.keysym.sym)
-			{
-				if (d->KEB_KEY == SDLK_LEFT)
-					d->i.left = 0;
-				if (d->KEB_KEY == SDLK_RIGHT)
-					d->i.right = 0;
-				if (d->KEB_KEY == SDLK_UP)
-					d->i.up = 0;
-				if (d->KEB_KEY == SDLK_DOWN)
-					d->i.down = 0;
-			}
-		}
-		break;
-	}
+	mlx_do_sync(d->mlx);
+	mlx_put_image_to_window(d->mlx, d->win, d->screen.img, 0, 0);
+}
+void		key_hook(int key, t_data *d)
+{
+	printf("%i\n", key);
+	if (key == ESC)
+		wolfydel(d);
 }
 
-void	events(t_data *d)
+void		mouse_hook(int button, int x, int y, t_data *d)
 {
-	event_keyboard(d);
+	if (button == 1)
+	{
+		d->click_x = x;
+		d->click_y = y;
+	}
 }

@@ -5,72 +5,76 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/09/29 18:08:50 by mwilk             #+#    #+#              #
-#    Updated: 2015/10/10 17:13:33 by mwilk            ###   ########.fr        #
+#    Created: 2014/11/09 16:17:56 by mwilk             #+#    #+#              #
+#    Updated: 2016/02/11 19:48:44 by mwilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
+## PROJECT
+
 NAME = wolf3d
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+LIBFT = libft
 
-OBJ_PATH = ./obj/
-SRC_PATH = ./
+## COMPILATEUR
+
+OS = $(shell uname -s)
+CC = clang
+FLAGS = -Wall -Wextra -Werror
+
+## FILES
+
+SRC = main.c\
+	    wolfy_draw.c\
+	    wolfy_events.c\
+	    wolfy_init.c\
+	    wolfy_map.c\
+	    wolfy_ray.c\
+	    wolfy_utils.c\
+	    wolfy_wall3d.c\
+
+INC =  -I ./
+INC += -I ./libft/includes/
+INC += -I minilibx/
 
 OBJ = $(SRC:.c=.o)
-SRC = main.c\
-	  wolfy_draw.c\
-	  wolfy_events.c\
-	  wolfy_init.c\
-	  wolfy_map.c\
-	  wolfy_ray.c\
-	  wolfy_utils.c\
-	  wolfy_wall3d.c\
 
-OBJS = $(addprefix $(OJB_PATH),$(OBJ))
-SRCS = $(addprefix $(SRC_PATH),$(SRC))
+LIB =  -L libft -lft
+LIB += -L minilibx/ -lmlx -framework OpenGl -framework Appkit
 
-FDF_H = -I ./
+## RULES
 
-LIB_H = -I Libft/includes/
-LIB_L = -LLibft -lft
+all: ml $(NAME)
 
-SLD_H =  -lSDL2
-SDL_L = `sdl2-config --cflags --libs`
+$(NAME): $(OBJ)
+	$(CC) $(FLAGS) $(INC) $(LIB) -o $(NAME) $(SRC)
+	@echo "\033[35m <(O.O<) WOW ! Very Fractol ! Amaze ! (>^o^)> \033[0m"
 
-all: makelib normal
+clean: mcl
+	rm -rf $(OBJ)
+	@echo "\033[36mT.T Miss you Frac object files T.T \033[0m"
 
-makelib:
-		@make -C Libft
-
-makerelib:
-		@make -C libft re
-
-cleanlib:
-		@make -C libft clean
-
-fcleanlib:
-		@make -C libft fclean
-
-normal: $(NAME)
-
-$(NAME):
-	@gcc $(CFLAGS) $(LIB_H) $(FDF_H) $(SDL_H) -c $(SRCS) 
-	@mkdir $(OBJ_PATH)
-	@gcc -o $(NAME) $(OBJ) $(LIB_L) $(SDL_L)
-	@mv $(OBJ) $(OBJ_PATH)
-	@echo "\033[35m <(O.O<) WOW ! Very Fdf ! Amaze ! (>^o^)> \033[0m"
-
-clean:
-	@/bin/rm -rf $(OBJ_PATH)
-	@echo "\033[36mT.T Miss you object files T.T \033[0m"
-
-fclean: clean
-	@/bin/rm $(NAME)
+fclean: mfl clean
+	rm -rf $(NAME)
 	@echo "\033[36m X.x Bye Bye compiled files >_< \033[0m"
+
+%.o:%.c
+	$(CC) $(FLAGS) $(INC) -c $< -o $@
+
+ml:
+		make -C libft
+
+mcl:
+		make -C libft clean
+
+mfl:
+		make -C libft fclean
+
+mrl:
+		make -C libft re
 
 re: fclean all
 
 .PHONY: all normal clean fclean re makelib makerelib cleanlib fcleanlib
+

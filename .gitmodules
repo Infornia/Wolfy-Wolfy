@@ -1,0 +1,6 @@
+[submodule "libft"]
+	path = libft
+	url = https://github.com/Infornia/libft.git
+[submodule "Old_wolfy/libft"]
+	path = Old_wolfy/libft
+	url = https://github.com/Infornia/libft.git

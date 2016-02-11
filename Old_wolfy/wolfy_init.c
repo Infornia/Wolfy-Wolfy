@@ -3,49 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   wolfy_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/08 16:53:19 by mwilk             #+#    #+#             */
-/*   Updated: 2015/10/08 21:23:24 by mwilk            ###   ########.fr       */
+/*   Created: 2016/02/11 21:43:00 by mwilk             #+#    #+#             */
+/*   Updated: 2016/02/11 21:50:53 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "wolfy.h"
 
-int			clean_up(t_data *d, int ret)
+void	init_mlx(t_data *d)
 {
-	if (d->rend)
-		SDL_DestroyRenderer(d->rend);
-	if (d->win)
-		SDL_DestroyWindow(d->win);
-	SDL_Quit();
-	return (ret);
-}
-
-static void	init_val(t_data *d)
-{
-	d->go = 1;
-}
-
-static int	init_SDL(t_data *d)
-{
-	(void)d;
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-		return(put_error("Error: Failed to init SDL"));
-	if (!(d->win = SDL_CreateWindow("Wolf3d", SDL_WINDOWPOS_CENTERED,
-					SDL_WINDOWPOS_CENTERED, WIN_X, WIN_Y, SDL_WINDOW_SHOWN)))
-		return (put_error("Error: Failed to create window"));
-	if (!(d->rend = SDL_CreateRenderer(d->win, -1, SDL_RENDERER_ACCELERATED)))
-		return (put_error("Error: Failed to create renderer"));
+	if (!(d->mlx = mlx_init()))
+		exit(tt_ps("Error: Failed to init mlx", 0));
+	if (!(d->win = mlx_new_window(d->mlx, 0, 0, "Wolf3d")))
+		exit(tt_ps("Error: Failed to create window", 0));
+	if (!(d->img = mlx_new_image(d->mlx, WINX, WINY)))
+		exit(tt_ps("Error: Failed to create img", 0));
 	return (0);
 }
-
-int		init(t_data *d)
-{
-	init_val(d);
-	init_map(d);
-	init_SDL(d);
-	return (0);
-}
-

@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:18:39 by mwilk             #+#    #+#             */
-/*   Updated: 2016/02/11 22:14:49 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/02/12 19:46:10 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 */
 #define WINX		640
 #define WINY		480
+#define MAP_SIZE	24
 
 /*
 **Colors
@@ -115,11 +116,11 @@ typedef struct	s_input
 
 typedef struct	s_data
 {
-  void        *mlx;
-  void        *win;
-  void        *img;
-  char        *datimg;
-	char			  *map_name;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	char			*datimg;
+	char			*file;
 
 	t_input			i;
 	t_ray			r;
@@ -140,7 +141,8 @@ int				get_map(t_data *d, int fd, int x, int y);
 ** wolfy_main.c
 */
 
-void			wolfy_main(t_data *d, char *file);
+void			wolfy_main(t_data *d);
+void			wolfydel(t_data *d);
 
 /*
 ** wolfy_init.c
@@ -154,7 +156,7 @@ void			init_mlx(t_data *d);
 */
 
 void			expose_hook(t_data *d);
-void			mouse_hook(t_data *d);
+void			mouse_hook(int button, int x, int y, t_data *d);
 void			key_hook(int key, t_data *d);
 
 

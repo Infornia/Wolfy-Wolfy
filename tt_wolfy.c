@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolfy_main.c                                       :+:      :+:    :+:   */
+/*   tt_wolfy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 20:04:39 by mwilk             #+#    #+#             */
-/*   Updated: 2016/02/11 22:09:32 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/02/17 20:21:40 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void		wolfynit(t_data *d)
 {
-	init_mlx(d);
-	init_val(d);
-	init_map(d);
+//	init_mlx(d);
+//	init_val(d);
+//	init_map(d);
 	d->go = 1;
 }
 
@@ -26,7 +26,7 @@ void		wolfydel(t_data *d)
 	mlx_destroy_window(d->mlx, d->win);
 }
 
-void		wolfy_main(t_data *d, char *file)
+void		tt_wolfy(t_data *d, char *file)
 {
 	d->file = file;
 	wolfynit(d);
@@ -35,5 +35,4 @@ void		wolfy_main(t_data *d, char *file)
 	mlx_hook(d->win, 6, 16, mouse_hook_move, d);
 	mlx_expose_hook(d->win, expose_hook, d);
 	mlx_loop(d->mlx);
-	return (0);
 }

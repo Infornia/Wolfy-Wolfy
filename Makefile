@@ -6,7 +6,7 @@
 #    By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:17:56 by mwilk             #+#    #+#              #
-#    Updated: 2016/02/17 19:50:56 by mwilk            ###   ########.fr        #
+#    Updated: 2016/02/17 20:38:49 by mwilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ FLAGS = -Wall -Wextra -Werror
 ## FILES
 
 SRC = main.c\
+	    tt_wolfy.c\
 	    wolfy_draw.c\
 	    wolfy_events.c\
 	    wolfy_init.c\
@@ -52,19 +53,22 @@ update:
 	git submodule foreach git pull origin master
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(INC) $(LIB) -o $(NAME) $(SRC)
-	@echo "\033[35m <(O.O<) WOW ! Very Fractol ! Amaze ! (>^o^)> \033[0m"
+	@$(CC) $(FLAGS) $(INC) $(LIB) -o $(NAME) $(SRC)
+	@echo "\033[35m <(O.O<) WOW ! Very $(NAME) ! Amaze ! (>^o^)> \033[0m"
 
 clean: mcl
 	rm -rf $(OBJ)
-	@echo "\033[36mT.T Miss you Frac object files T.T \033[0m"
+	@echo "\033[36mT.T Miss you $(NAME)-object files T.T \033[0m"
 
-fclean: mfl clean
+fclean: mfl
+	rm -rf $(OBJ)
+	@echo "\033[36mT.T Miss you $(NAME)-object files T.T \033[0m"
 	rm -rf $(NAME)
-	@echo "\033[36m X.x Bye Bye compiled files >_< \033[0m"
+	@echo "\033[36m X.x Bye Bye $(NAME)-compiled files >_< \033[0m"
 
 %.o:%.c
-	$(CC) $(FLAGS) $(INC) -c $< -o $@
+	@echo "<(O.o)>\t\t$@\t\t<(o.O)>"
+	@$(CC) $(FLAGS) $(INC) -c $< -o $@
 
 ml:
 		make -C libft
@@ -75,10 +79,7 @@ mcl:
 mfl:
 		make -C libft fclean
 
-mrl:
-		make -C libft re
-
 re: fclean all
 
-.PHONY: all normal clean fclean re makelib makerelib cleanlib fcleanlib
+.PHONY: all normal clean fclean re makelib ml mcl mfl
 

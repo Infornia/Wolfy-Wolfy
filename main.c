@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 21:39:30 by mwilk             #+#    #+#             */
-/*   Updated: 2016/02/17 19:57:15 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/02/17 20:19:31 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		main(int ac, char **av)
 		tt_perr("Failed to malloc data", "", 0);
 	d->file = av[1];
 	if (ac == 2)
-		wolfy_main(d);
+		tt_wolfy(d, av[1]);
 	else
 		ft_puts("Usage: ./wolf3d [MAP]");
 	free(d);

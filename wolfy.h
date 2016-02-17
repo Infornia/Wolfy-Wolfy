@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:18:39 by mwilk             #+#    #+#             */
-/*   Updated: 2016/02/12 19:46:10 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/02/17 20:22:10 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int				get_map(t_data *d, int fd, int x, int y);
 ** wolfy_main.c
 */
 
-void			wolfy_main(t_data *d);
+void			tt_wolfy(t_data *d, char *file);
 void			wolfydel(t_data *d);
 
 /*
@@ -152,12 +152,13 @@ void			init_mlx(t_data *d);
 
 
 /*
-** wolfy_hook.c
+** wolfy_events.c
 */
 
-void			expose_hook(t_data *d);
-void			mouse_hook(int button, int x, int y, t_data *d);
-void			key_hook(int key, t_data *d);
+int			expose_hook(t_data *d);
+int			mouse_hook(int button, int x, int y, t_data *d);
+int			mouse_hook_move(int x, int y, t_data *d);
+int			key_hook(int key, t_data *d);
 
 
 /*

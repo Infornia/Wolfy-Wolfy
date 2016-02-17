@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 21:43:00 by mwilk             #+#    #+#             */
-/*   Updated: 2016/02/11 21:50:53 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/02/17 19:46:54 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,4 @@ void	init_mlx(t_data *d)
 		exit(tt_ps("Error: Failed to create window", 0));
 	if (!(d->img = mlx_new_image(d->mlx, WINX, WINY)))
 		exit(tt_ps("Error: Failed to create img", 0));
-	return (0);
 }

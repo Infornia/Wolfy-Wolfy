@@ -6,7 +6,7 @@
 #    By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:17:56 by mwilk             #+#    #+#              #
-#    Updated: 2016/02/11 19:48:44 by mwilk            ###   ########.fr        #
+#    Updated: 2016/02/17 19:50:56 by mwilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ SRC = main.c\
 	    wolfy_draw.c\
 	    wolfy_events.c\
 	    wolfy_init.c\
-	    wolfy_map.c\
 	    wolfy_ray.c\
 	    wolfy_utils.c\
 	    wolfy_wall3d.c\
@@ -46,6 +45,11 @@ LIB += -L minilibx/ -lmlx -framework OpenGl -framework Appkit
 ## RULES
 
 all: ml $(NAME)
+
+update:
+	git pull
+	git submodule update --init --recursive
+	git submodule foreach git pull origin master
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(INC) $(LIB) -o $(NAME) $(SRC)

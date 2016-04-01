@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 20:04:39 by mwilk             #+#    #+#             */
-/*   Updated: 2016/02/17 20:21:40 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/04/01 05:23:32 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static void		wolfynit(t_data *d)
 {
-//	init_mlx(d);
-//	init_val(d);
+	init_mlx(d);
+	printf("mlx initiated:\tbpp: %i\tsize_line: %i\tendian: %i\n",
+			d->bpp, d->size_line, d->endian);
+	init_val(d);
 //	init_map(d);
 	d->go = 1;
 }
@@ -24,6 +26,7 @@ void		wolfydel(t_data *d)
 {
 	mlx_destroy_image(d->mlx, d->img);
 	mlx_destroy_window(d->mlx, d->win);
+	exit(0);
 }
 
 void		tt_wolfy(t_data *d, char *file)

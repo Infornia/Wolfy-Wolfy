@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:18:39 by mwilk             #+#    #+#             */
-/*   Updated: 2016/02/17 20:22:10 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/04/01 05:23:50 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,14 @@ typedef struct	s_data
 	void			*mlx;
 	void			*win;
 	void			*img;
-	char			*datimg;
+	char			*dimg;
 	char			*file;
 
+	int				bpp;
+	int				size_line;
+	int				endian;
+	int				draw;
+	int				dimg_size;
 	t_input			i;
 	t_ray			r;
 	t_cam			c;
@@ -149,6 +154,7 @@ void			wolfydel(t_data *d);
 */
 
 void			init_mlx(t_data *d);
+void			init_val(t_data *d);
 
 
 /*
@@ -166,6 +172,7 @@ int			key_hook(int key, t_data *d);
 */
 
 void	draw(t_data *d);
+void	color_pixel(t_data *d, unsigned int color, int x, int y);
 
 
 /*

@@ -6,7 +6,7 @@
 #    By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:17:56 by mwilk             #+#    #+#              #
-#    Updated: 2016/02/17 20:38:49 by mwilk            ###   ########.fr        #
+#    Updated: 2016/04/01 22:32:14 by mwilk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ update:
 $(NAME): $(OBJ)
 	@$(CC) $(FLAGS) $(INC) $(LIB) -o $(NAME) $(SRC)
 	@echo "\033[35m <(O.O<) WOW ! Very $(NAME) ! Amaze ! (>^o^)> \033[0m"
+	@mkdir -p ./obj; mv $(OBJ) ./obj
 
 clean: mcl
 	rm -rf $(OBJ)

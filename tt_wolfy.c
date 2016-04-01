@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 20:04:39 by mwilk             #+#    #+#             */
-/*   Updated: 2016/04/01 05:23:32 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/04/01 22:46:19 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static void		wolfynit(t_data *d)
 	printf("mlx initiated:\tbpp: %i\tsize_line: %i\tendian: %i\n",
 			d->bpp, d->size_line, d->endian);
 	init_val(d);
-//	init_map(d);
+	printf("val\n");
+	init_map(d);
+	printf("map\n");
 	d->go = 1;
 }
 

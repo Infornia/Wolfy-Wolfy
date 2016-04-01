@@ -6,7 +6,7 @@
 /*   By: mwilk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/29 20:18:39 by mwilk             #+#    #+#             */
-/*   Updated: 2016/04/01 05:23:50 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/04/01 23:56:02 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,22 +116,25 @@ typedef struct	s_input
 
 typedef struct	s_data
 {
+	t_input			i;
+	t_ray			r;
+	t_cam			c;
+
 	void			*mlx;
 	void			*win;
 	void			*img;
 	char			*dimg;
-	char			*file;
 
 	int				bpp;
 	int				size_line;
 	int				endian;
-	int				draw;
-	int				dimg_size;
-	t_input			i;
-	t_ray			r;
-	t_cam			c;
-	int				map[MAP_SIZE][MAP_SIZE];
 
+	int				**map;
+	int				map_size;
+	int				dimg_size;
+	char			*file;
+
+	int				draw;
 	int				go;
 }			t_data;
 

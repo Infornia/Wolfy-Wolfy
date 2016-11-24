@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/07 15:51:38 by mwilk             #+#    #+#             */
-/*   Updated: 2016/11/22 20:36:02 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/11/24 17:42:34 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct			s_cam
 {
 	t_vec3				p;
 	t_vec3				dir;
-	t_vec3				upleft;
+	t_vec3			 	upleft;
 	double				w;
 	double				h;
 	double				f;
@@ -45,12 +45,44 @@ typedef struct			s_cam
 
 }						t_cam;
 
+typedef struct			s_game
+{
+	double				oldDirX;
+	double				oldPlaneX;
+	double				sideDistX;
+	double				sideDistY;
+	double				posX;
+	double				posY;
+	double				dirX;
+	double				dirY;
+	double				rayPosX;
+	double				rayPosY;
+	double				cameraX;
+	double				planeX;
+	double				planeY;
+	double				rayDirX;
+	double				rayDirY;
+	int					mapX;
+	int					mapY;
+	int					stepX;
+	int					stepY;
+	int					side;
+	double				deltaDistX;
+	double				deltaDistY;
+	double				perpWallDist;
+	double				rotSpeed;
+	double				moveSpeed;
+	
+}						t_game;
+
+
 struct					s_data
 {
 	t_cam				cam;
 	t_ray				r;
 	t_color				c;
-	int					**map;
+	t_game				g;
+	int					**worldMap;
 	void				*mlx;
 	void				*win;
 	void				*img;

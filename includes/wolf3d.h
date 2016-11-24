@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:38:33 by mwilk             #+#    #+#             */
-/*   Updated: 2016/11/22 19:18:11 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/11/24 16:26:08 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 *******************INIT.C
 */
 
-t_data			*init(char *name);
+t_data			*init();
 
 /*
 *******************COLOR.C
@@ -49,14 +49,14 @@ t_color			mult_col(t_color c, t_color c2);
 
 t_vec3			get_ray_dir(int x, int y);
 void			render(t_data *d);
-void			draw(t_data *d);
+void			draw(t_data *d, int wm[MAP_W][MAP_H]);
 
 /*
 *******************HOOKS.C
 */
 
 int				expose_hook(t_data *d);
-int				key_hook(int key, t_data *d);
+int				key_hook(int key, t_data *d, int worldMap[MAP_W][MAP_H]);
 
 /*
 *******************MLX.C

@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 16:19:54 by mwilk             #+#    #+#             */
-/*   Updated: 2016/11/24 17:38:17 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/11/26 16:39:04 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ int				key_hook(int key, t_data *d, int worldMap[MAP_W][MAP_H])
 		destroy_mlx(d);
 	if (key == UP)
 	{
-		if(worldMap[int(d->g.posX + d->g.dirX * d->g.moveSpeed)][int(d->g.posY)] == false) d->g.posX += d->g.dirX * d->g.moveSpeed;
-		if(worldMap[int(d->g.posX)][int(d->g.posY + d->g.dirY * d->g.moveSpeed)] == false) d->g.posY += d->g.dirY * d->g.moveSpeed;
+		if(worldMap[(int)(d->g.posX + d->g.dirX * d->g.moveSpeed)][(int)(d->g.posY)] == 0)
+		d->g.posX += d->g.dirX * d->g.moveSpeed;
+		if(worldMap[(int)(d->g.posX)][(int)(d->g.posY + d->g.dirY * d->g.moveSpeed)] == 0)
+		d->g.posY += d->g.dirY * d->g.moveSpeed;
 	}
 	//move backwards if no wall behind you
 	if (key == DOWN)
 	{
-		if(worldMap[int(d->g.posX - d->g.dirX * d->g.moveSpeed)][int(d->g.posY)] == false) d->g.posX -= d->g.dirX * d->g.moveSpeed;
-		if(worldMap[int(d->g.posX)][int(d->g.posY - d->g.dirY * d->g.moveSpeed)] == false) d->g.posY -= d->g.dirY * d->g.moveSpeed;
+		if(worldMap[(int)(d->g.posX - d->g.dirX * d->g.moveSpeed)][(int)(d->g.posY)] == 0) d->g.posX -= d->g.dirX * d->g.moveSpeed;
+		if(worldMap[(int)(d->g.posX)][(int)(d->g.posY - d->g.dirY * d->g.moveSpeed)] == 0) d->g.posY -= d->g.dirY * d->g.moveSpeed;
 	}
 	//rotate to the right
 	if (key == RIGHT)
@@ -59,4 +61,3 @@ int				key_hook(int key, t_data *d, int worldMap[MAP_W][MAP_H])
 	draw(d, worldMap);
 	return (1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: mwilk <mwilk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/04 17:14:15 by mwilk             #+#    #+#             */
-/*   Updated: 2016/11/24 17:44:39 by mwilk            ###   ########.fr       */
+/*   Updated: 2016/11/26 16:50:34 by mwilk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void			draw(t_data *d, int worldMap[MAP_W][MAP_H])
       //timing for input and FPS counter
       oldTime = time;
       time = clock();
-      double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
+      double frameTime = (time - oldTime) / 1000000; //frameTime is the time this frame has taken, in seconds
       printf("Frame: %f\n", 1.0 / frameTime); //FPS counter
       mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
 	  ft_bzero(d->dimg, d->max_size);

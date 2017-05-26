@@ -1,1 +1,3 @@
-# RayTracing
+#Wolf-3D
+
+L'objectif est de recoder la base de Wolfenstein 3D à l'aide de la méthode du Raycasting, à savoir avoir des murs, la possibilité de se déplacer et en bonus utiliser les sprite, portes, clé, tirs, ajouter des IA, empêcher la traversée des murs, etc...
